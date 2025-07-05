@@ -6,7 +6,7 @@ public static class ScanRoutes
 {
     public static void MapScanRoutes(this IEndpointRouteBuilder app)
     {
-        var scans = app.MapGroup("/scans");
+        var scans = app.MapGroup("/api/v1/scans");
 
         scans.MapGet("/", ScanController.GetAllScans);
         scans.MapGet("/{id}/notes", ScanController.GetScanNotes);
