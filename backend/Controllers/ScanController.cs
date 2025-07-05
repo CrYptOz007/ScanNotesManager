@@ -10,8 +10,12 @@ public static class ScanController
 {
     public static async Task<IResult> GetAllScans(ApplicationDbContext db)
     {
-        System.Diagnostics.Debug.WriteLine("Fetching all scans from the database.");
-        return TypedResults.Ok(await db.Scans.ToArrayAsync());
+        return TypedResults.Ok(new
+        {
+            success = true,
+            message = "Scans fetched successfully",
+            payload = await db.Scans.ToArrayAsync()
+        });
     }
 
     public static async Task<IResult> GetScanNotes(int id, ApplicationDbContext db)
@@ -21,16 +25,31 @@ public static class ScanController
             .ToArrayAsync();
         
         if (!await db.Scans.AnyAsync(s => s.Id == id))
-            return TypedResults.NotFound();
+            return TypedResults.Ok(new 
+            {
+                success = false,
+                message = "Scan not found",
+                payload = Array.Empty<Note>()
+            });
         
-        return TypedResults.Ok(notes);
+        return TypedResults.Ok(new
+        {
+            success = true,
+            message = "Scan notes fetched successfully",
+            payload = notes
+        });
     }
 
     public static async Task<IResult> CreateScanNote(int id, CreateNoteDto inputNote, ApplicationDbContext db)
     {
         if (string.IsNullOrWhiteSpace(inputNote.Title))
         {
-            return TypedResults.BadRequest(new { error = "Title is required" });
+            return TypedResults.BadRequest(new
+            {
+                success = false,
+                message = "Title is required",
+                payload = (object?)null
+            });
         }
 
         var scan = await db.Scans.FindAsync(id);
@@ -47,6 +66,11 @@ public static class ScanController
         db.Notes.Add(note);
         await db.SaveChangesAsync();
 
-        return TypedResults.Created($"/scans/{id}/notes/{note.Id}", note);
+        return TypedResults.Created($"/scans/{id}/notes/{note.Id}", new
+        {
+            success = true,
+            message = "Note created successfully",
+            payload = note
+        });
     }
 }
