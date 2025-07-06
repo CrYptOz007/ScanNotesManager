@@ -44,10 +44,7 @@ export class requestHandler {
 
         } catch (err) {
                 console.debug("Request Error:", err);
-            throw {
-                success: false,
-                message: (err as AxiosError)?.message
-            };
+            throw (err as AxiosError)?.message;
         }
     }
 
