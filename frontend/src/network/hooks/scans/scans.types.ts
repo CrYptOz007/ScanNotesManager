@@ -7,6 +7,11 @@ export interface IScanNote {
     id: number;
     scanId: number;
     title: string;
-    content: string;
+    content?: string;
     createdAt: string;
 }
+
+export type IScanNoteForm = {
+    title: string;
+    content?: string;
+};
