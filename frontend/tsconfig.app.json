@@ -21,7 +21,17 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src"],
+      "@network/*": ["./src/network/*"],
+      "@hooks/*": ["./src/network/hooks/*"],
+      "@modules/*": ["./src/components/modules/*"],
+      "@generic/*": ["./src/components/generic/*"],
+    },
   },
   "include": ["src"]
 }
