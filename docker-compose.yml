@@ -1,0 +1,35 @@
+services:
+  backend:
+    container_name: scan-notes-backend
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
+      target: dev
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - /app/bin
+      - /app/obj
+  frontend:
+    container_name: scan-notes-frontend
+    build:
+      context: ./frontend
+      dockerfile: docker/Dockerfile
+      target: dev
+    working_dir: /app
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    
+  nginx:
+    container_name: scan-notes-nginx
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.local.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
