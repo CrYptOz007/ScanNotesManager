@@ -43,7 +43,12 @@ export class requestHandler {
             }
 
         } catch (err) {
-                console.debug("Request Error:", err);
+            if (err instanceof AxiosError) {
+                return {
+                    ...err.response?.data,
+                    status: err.response?.status,
+                }
+            }
             throw (err as AxiosError)?.message;
         }
     }
