@@ -32,7 +32,7 @@ export const AccordionTitle = ({ children, ...props }: React.HTMLAttributes<HTML
     return (
         <div 
             {...props}
-            className="p-4 cursor-pointer hover:bg-gray-50 flex justify-between w-full"
+            className="p-4 cursor-pointer bg-white hover:bg-gray-50 flex justify-between w-full"
             onClick={context.toggle}
         >
             <span>{children}</span>
@@ -50,7 +50,7 @@ export const AccordionContent = ({ children, ...props }: React.HTMLAttributes<HT
     if (!context.isOpen) return null;
     
     return (
-        <div {...props} className="p-4 border-t border-gray-200 w-full">
+        <div {...props} className="p-4 border-t bg-white border-gray-200 w-full">
             {children}
         </div>
     );
