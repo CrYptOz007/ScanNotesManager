@@ -11,7 +11,7 @@ export const ScanList = () => {
                 <div className="flex items-center justify-center h-full">
                     <p className="text-gray-500">Loading scans...</p>
                 </div>
-            ) : scans?.payload ? (
+            ) : scans?.payload && scans?.payload.length > 0 ? (
                 <>
                     {scans?.payload.map(scan => (
                         <ListItem
