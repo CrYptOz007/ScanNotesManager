@@ -6,7 +6,7 @@ const SCANS = '/scans';
 
 export type IScanNotesReturn = IScanNote[];
 
-export const getScanNotes = async (id: string, params?: IParamsInterface): Promise<IBaseApiResponse<IScanNotesReturn>> => {
+export const getScanNotes = async (id: number, params?: IParamsInterface): Promise<IBaseApiResponse<IScanNotesReturn>> => {
     try {
         const res = await GET(`${SCANS}/${id}/notes`, {...params});
         return {

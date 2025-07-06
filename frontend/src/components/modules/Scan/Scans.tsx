@@ -1,4 +1,5 @@
 import { ScanContextProvider } from "./context/ScanContext"
+import { ScanContent } from "./ScanContent/ScanContent"
 import { ScanList } from "./ScanList"
 
 export const Scans = () => {
@@ -6,9 +7,7 @@ export const Scans = () => {
         <ScanContextProvider>
             <div className="grid grid-cols-3">
                 <ScanList />
-                <div className="cols-span-2 flex items-center justify-center">
-                    
-                </div>
+                <ScanContent />
             </div>
         </ScanContextProvider>
     )
