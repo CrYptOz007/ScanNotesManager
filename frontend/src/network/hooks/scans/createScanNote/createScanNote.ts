@@ -6,7 +6,7 @@ export const SCANS = '/scans';
 
 export type ICreateScanNote = IScanNote & { scan: IScan };
 
-export const createScanNote = async (id: string, params: ICreateScanNote): Promise<IBaseApiResponse<ICreateScanNote>> => {
+export const createScanNote = async (id: number, params: ICreateScanNote): Promise<IBaseApiResponse<ICreateScanNote>> => {
     try {
         const res = await POST(`${SCANS}/${id}/notes`, undefined, params);
         return {
